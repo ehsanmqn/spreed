@@ -81,6 +81,32 @@ Feature: conversation
     And I see that the chat is shown in the main view
     And I see that the sidebar is open
 
+  Scenario: force user back in a one-to-one conversation after leaving it
+    Given I act as John
+    And I am logged in
+    And I have opened the Talk app
+    And I create a one-to-one conversation with "admin"
+    And I act as Jane
+    And I am logged in as the admin
+    And I have opened the Talk app
+    And I open the "user0" conversation
+    And I act as John
+    And I leave the "admin" conversation
+    And I see that the "admin" conversation is not shown in the list
+    And I see that the "Join a conversation or start a new one Say hi to your friends and colleagues!" empty content message is shown in the main view
+    And I see that the sidebar is closed
+    And I act as Jane
+    And I see that the number of participants shown in the list is "1"
+    When I send a new chat message with the text "Come back!"
+    And I see that the message 1 was sent by "admin" with the text "Come back!"
+    Then I see that the number of participants shown in the list is "2"
+    And I see that "user0" is shown in the list of participants as a moderator
+    And I see that "admin" is shown in the list of participants as a moderator
+    And I act as John
+    And I see that the "admin" conversation is shown in the list
+    And I see that the "Join a conversation or start a new one Say hi to your friends and colleagues!" empty content message is shown in the main view
+    And I see that the sidebar is closed
+
   Scenario: leave a conversation
     Given I act as John
     And I am logged in
