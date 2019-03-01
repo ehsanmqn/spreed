@@ -69,12 +69,14 @@ Feature: conversation
     And I see that the "user0" conversation is active
     And I see that the chat is shown in the main view
     And I see that the sidebar is open
+    And I see that the number of participants shown in the list is "2"
     When I act as John
     And I leave the "admin" conversation
     Then I see that the "admin" conversation is not shown in the list
     And I see that the "Join a conversation or start a new one Say hi to your friends and colleagues!" empty content message is shown in the main view
     And I see that the sidebar is closed
     And I act as Jane
+    And I see that the number of participants shown in the list is "1"
     And I see that the "user0" conversation is shown in the list
     And I see that the chat is shown in the main view
     And I see that the sidebar is open
